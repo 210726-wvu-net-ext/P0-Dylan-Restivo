@@ -1,15 +1,18 @@
 #! /usr/bin/bash
 
 #FizzBuzz  3 and 5
-for ((i=0;i<20;i++))
+for ((i=1;i<=20;i++))
 do
-    if [ !((i%2)) && !((i%5)) ]
+    if !((i%3)) && !((i%5)) 
     then
         echo 'FizzBuzz!!!'
-    elif [ !((i%2)) ]
+    elif  !((i%3)) 
     then
         echo 'Fizz!'
-    elif [ !((i%5)) ]
+    elif  !((i%5)) 
+    then
         echo 'Buzz!'
+    else
+        echo $i
     fi
 done

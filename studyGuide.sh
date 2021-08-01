@@ -2,12 +2,93 @@
  : '
     This script is a study guide for week 1 it covers the topics of environment, git, ... 
     When user reaches the end of a section they can input "exit" to end program or anything else to return to selection.
+    Started on quiz section
  
  '
+# Function to create a quizz module
+correctAnswers=0
+totalAnswers=5
+
+# Quiz answer variables
+# Question 1
+q1Answer1=Looping_through_statments
+q1Answer2=Assigning_one_value_to_another
+q1Answer3=Setting_up_the_Unix_environment
+q1Answer4=Version_control
+# Question 2
+q2Answer1=Wrong_Answer
+q2Answer2=Right_Answer
+q2Answer3=Wrong_Answer
+q2Answer4=Wrong_Answer
+
+# Beginning of quiz
+    # Question 1
+    question1 () {
+    echo "1) What is git used for?"
+    select answer in  $q1Answer1 $q1Answer2 $q1Answer3 $q1Answer4
+do
+    case $answer in
+        $q1Answer1)
+            clear
+            echo "Wrong answer"
+            question1
+            ;;
+        $q1Answer2)
+            clear
+            echo "Wrong answer"
+            question1
+            ;;
+        $q1Answer3)  
+            clear
+            echo "Wrong answer"
+            question1
+            ;;
+        $q1Answer4)
+            echo "Correct answer"
+            sleep .25
+            clear
+            sleep .25
+            question2
+            ;; 
+    esac
+done 
+    }
+    # Question 2
+    question2 () {
+        echo "1) What is question 2?"
+    select answer in  $q2Answer1 $q2Answer2 $q2Answer3 $q2Answer4
+do
+    case $answer in
+        $q2Answer1)
+            clear
+            echo "Wrong answer"
+            question2
+            ;;
+        $q2Answer2)
+            clear
+            echo "Correct answer"
+            sleep .25
+            clear
+            sleep .25
+            #question3
+            ;;
+        $q2Answer3)  
+            clear
+            echo "Wrong answer"
+            question2
+            ;;
+        $q2Answer4)
+            echo "Wrong answer"
+            question2
+            ;; 
+    esac
+done
+    }
+
  # Create function that encloses the selections. This is used as a return point when at end of sections (call function) and to begin the script.
 startChoicesFunc () {
 echo "Please select an option to begin: "
-    select subject in environment git quit
+    select subject in environment git quizz quit
     do
      case $subject in
           environment)
@@ -85,10 +166,20 @@ echo "Please select an option to begin: "
             fi
             ;;
 
+            quizz)
+                echo "Clearing terminal"
+                clear
+                sleep .1
+                echo "Welcome to the week 1 practice quizz"
+                sleep .5
+                question1
+                ;;
+
             quit)
                 echo "Goodbye!"
                 sleep 1
                 exit
+                ;;
 
         esac
     done 

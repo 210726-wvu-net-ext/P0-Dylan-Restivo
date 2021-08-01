@@ -3,11 +3,14 @@
     This script is a study guide for week 1 it covers the topics of environment, git, ... 
     When user reaches the end of a section they can input "exit" to end program or anything else to return to selection.
     Started on quiz section
- 
+
+    1) To do: count correct answers and give total. Have variables when a question is gotten wrong that change and prevent i counting as correct
+    2) Had spaces working for a minute using ^ as an escape character. Stopped working at some point
+
  '
-# Function to create a quizz module
-correctAnswers=0
-totalAnswers=5
+# # Function to create a quizz module --- Not used yet--- See to do 1)
+# correctAnswers=0
+# totalAnswers=5
 
 # Quiz answer variables
 # Question 1
@@ -16,19 +19,37 @@ q1Answer2=Assigning_one_value_to_another
 q1Answer3=Setting_up_the_Unix_environment
 q1Answer4=Version_control
 # Question 2
-q2Answer1=Wrong_Answer
-q2Answer2=Right_Answer
-q2Answer3=Wrong_Answer
-q2Answer4=Wrong_Answer
+q2Answer1=variableName\+value
+q2Answer2=variableName\=value
+q2Answer3=variableName\=value\;
+q2Answer4=value\=variableName
+
+# Question 3
+q3Answer1=git_create_new
+q3Answer2=git_start_new
+q3Answer3=git_init
+q3Answer4=git_clone_url
+
+# Question 4
+q4Answer1=arithmatic_operations\,_variable_tracking\,_and_loop_verification
+q4Answer2=version_control\,_remote_backups\,_and_change_logs
+q4Answer3=free_smores\,_cheap_tacos\,_and_fresh_fish
+q4Answer4=instant_bug_fixes\,_history_deletion\,_and_better_Googl\-foo
+
+# Question 5
+q5Answer1=local_repository
+q5Answer2=GitHub_repository
+q5Answer3=Recycle_bin
+q5Answer4=Staging_area
 
 # Beginning of quiz
     # Question 1
     question1 () {
     echo "1) What is git used for?"
-    select answer in  $q1Answer1 $q1Answer2 $q1Answer3 $q1Answer4
+    select answer in  "$q1Answer1" $q1Answer2 $q1Answer3 $q1Answer4
 do
     case $answer in
-        $q1Answer1)
+        "$q1Answer1")
             clear
             echo "Wrong answer"
             question1
@@ -45,7 +66,7 @@ do
             ;;
         $q1Answer4)
             echo "Correct answer"
-            sleep .25
+            sleep 1
             clear
             sleep .25
             question2
@@ -55,7 +76,7 @@ done
     }
     # Question 2
     question2 () {
-        echo "1) What is question 2?"
+        echo "2) How do you declare a varable in shell?"
     select answer in  $q2Answer1 $q2Answer2 $q2Answer3 $q2Answer4
 do
     case $answer in
@@ -65,12 +86,11 @@ do
             question2
             ;;
         $q2Answer2)
-            clear
             echo "Correct answer"
-            sleep .25
+            sleep 1
             clear
             sleep .25
-            #question3
+            question3
             ;;
         $q2Answer3)  
             clear
@@ -78,8 +98,106 @@ do
             question2
             ;;
         $q2Answer4)
+            clear
             echo "Wrong answer"
             question2
+            ;; 
+    esac
+done
+    }
+
+        # Question 3
+    question3 () {
+        echo "3) How do you initalize a new git repository on your local machine?"
+    select answer in  $q3Answer1 $q3Answer2 $q3Answer3 $q3Answer4
+do
+    case $answer in
+        $q3Answer1)
+            clear
+            echo "Wrong answer"
+            question3
+            ;;
+        $q3Answer2)
+            clear
+            echo "Wrong answer"
+            question3
+            ;;
+        $q3Answer3)  
+            echo "Correct answer"
+            sleep 1
+            clear
+            sleep .25
+            question4
+            ;;
+        $q3Answer4)
+            clear
+            echo "Wrong answer"
+            question3
+            ;; 
+    esac
+done
+    }
+
+            # Question 4
+    question4 () {
+        echo "4) What are some benefits of using git?"
+    select answer in  $q4Answer1 $q4Answer2 $q4Answer3 $q4Answer4
+do
+    case $answer in
+        $q4Answer1)
+            clear
+            echo "Wrong answer"
+            question4
+            ;;
+        $q4Answer2)
+            echo "Correct answer"
+            sleep 1
+            clear
+            sleep .25
+            question5
+            ;;
+        $q4Answer3)  
+            clear
+            echo "Wrong answer"
+            question4
+            ;;
+        $q4Answer4)
+            clear
+            echo "Wrong answer"
+            question4
+            ;; 
+    esac
+done
+    }
+
+            # Question 5
+    question5 () {
+        echo "5) When you use the git add filename command what area does the file get added to?"
+    select answer in  $q5Answer1 $q5Answer2 $q5Answer3 $q5Answer4
+do
+    case $answer in
+        $q5Answer1)
+            clear
+            echo "Wrong answer"
+            question5
+            ;;
+        $q5Answer2)
+            clear
+            echo "Wrong answer"
+            question5
+            ;;
+        $q5Answer3)  
+            clear
+            echo "Wrong answer"
+            question5
+            ;;
+        $q5Answer4)
+            echo "Correct answer"
+            sleep 1
+            clear
+            sleep .25
+            #results
+            exit
             ;; 
     esac
 done

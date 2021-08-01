@@ -1,13 +1,13 @@
 #! /usr/bin/bash
  : '
     This script is a study guide for week 1 it covers the topics of environment, git, ... 
-    When user reaches the end of a section they can input "yes" to end program or anything else to return to selection.
+    When user reaches the end of a section they can input "exit" to end program or anything else to return to selection.
  
  '
  # Create function that encloses the selections. This is used as a return point when at end of sections (call function) and to begin the script.
 startChoicesFunc () {
 echo "Please select an option to begin: "
-    select subject in environment git
+    select subject in environment git quit
     do
      case $subject in
           environment)
@@ -32,13 +32,15 @@ echo "Please select an option to begin: "
                 sleep .25
             echo "The least amount of info you need to configure in this file is type of terminal you are using, a list of files where it should look for commands, and a list of vars that tell the shell how to modify aparance and use." $'\n'
                 sleep .25
-            echo "S"
+            echo "A useful command in the terminal is Ctrl + L to clear it quickly"
                 sleep .25
-            # Prompt user for input. "yes" will end the program, but any other input will return to selection.
-            echo "Press enter to go back to selection or type \"yes\" to end"
+            # Prompt user for input. "exit" will end the program, but any other input will return to selection.
+            echo "Press enter to go back to selection or type \"exit\" to end"
             read exitVarEnv
-            if (( $exitVarEnv == yes ))
+            if (( $exitVarEnv == exit ))
             then
+            echo "Goodbye!"
+            sleep 1
             exit
             else
             startChoicesFunc
@@ -52,32 +54,41 @@ echo "Please select an option to begin: "
                 sleep .25
             echo "Git allows a user to have a record of any changes made and allows others to offer contirubtions to a project." $'\n'
                 sleep .25
-            echo "Once git is installed you can create a repository and copy its URL to use in the command \"git clone url\". You can also use \"git init\" t initialize a new repository on your local machine" $'\n'
+            echo "Git is often used in conjunction with GitHub. This is a website that allows you to upload your local repositories to the internet for safe kepping and sharing." $'\n'
                 sleep .25
-            echo "Once your setup is complete you can use \"git status\" to  see what files in your directory are added to you workspace or not. " $'\n'
+            echo "Once git is installed you can create a repository on GitHub and copy its URL to use in the command \"git clone url\". You can also use \"git init\" t initialize a new repository on your local machine" $'\n'
                 sleep .25
-            echo "" $'\n'
+            echo "Once your setup is complete you can use \"git status\" to  see what files in your directory are included in your workspace or not. " $'\n'
                 sleep .25
-            echo "" $'\n'
+            echo "Files start in your working directory. You can use \"git add filename\" to add files into your staging area" $'\n'
                 sleep .25
-            echo "" $'\n'
+            echo "From the staging area you can use \"git commit -m add_commit_message\" to make an update to your local repository." $'\n'
                 sleep .25
-            echo "" $'\n'
+            echo "The next step is to use the command \"git push\" to add the file to your GitHub for the first time." $'\n'
                 sleep .25
-            echo "" $'\n'
+            echo "Once a file is on GitHub it's a good idea to create a new branch to work in using \"git checkout -b branch_name\" and then when you are ready to push that file use \"git push --set-upstream origin branch_name\" " $'\n'
                 sleep .25
-            echo "S"
+            echo "After the changed file is uploaded, head to GitHub and check the changes in a pull request and commit them to the GitHub repository if they look good." $'\n'
                 sleep .25
-            # Prompt user for input. "yes" will end the program, but any other input will return to selection.
-            echo "Press enter to go back to selection or type \"yes\" to end"
+            echo "There are various commands in Git for undoing changes in different ways. Check them out here: https://docs.gitlab.com/ee/topics/git/numerous_undo_possibilities_in_git/"
+                sleep .25
+            # Prompt user for input. "exit" will end the program, but any other input will return to selection.
+            echo "Press enter to go back to selection or type \"exit\" to end"
             read exitVarGit
-            if (( $exitVarGit == yes ))
+            if (( $exitVarGit == exit ))
             then
+            echo "Goodbye!"
+            sleep 1
             exit
             else
             startChoicesFunc
             fi
             ;;
+
+            quit)
+                echo "Goodbye!"
+                sleep 1
+                exit
 
         esac
     done 

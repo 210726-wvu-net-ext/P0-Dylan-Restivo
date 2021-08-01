@@ -4,13 +4,14 @@
     When user reaches the end of a section they can input "yes" to end program or anything else to return to selection.
  
  '
- #create function that encloses the selections. This is used as a return point when at end of sections (call function) and to begin the script.
+ # Create function that encloses the selections. This is used as a return point when at end of sections (call function) and to begin the script.
 startChoicesFunc () {
 echo "Please select an option to begin: "
-    select lang in environment git
+    select subject in environment git
     do
-     case $lang in
+     case $subject in
           environment)
+            # Environment info selection. Prints info with a quarter of a second delay between lines.
             echo "Environment has been selected" $'\n'
                 sleep .25
             echo "In Unix the environment is an important concept and is defined by environmental variables. Some examples are PS1, PS2, pwd, BASH_VERSION." $'\n'
@@ -33,6 +34,7 @@ echo "Please select an option to begin: "
                 sleep .25
             echo "S"
                 sleep .25
+            # Prompt user for input. "yes" will end the program, but any other input will return to selection.
             echo "Press enter to go back to selection or type \"yes\" to end"
             read exitVarEnv
             if (( $exitVarEnv == yes ))
@@ -42,17 +44,17 @@ echo "Please select an option to begin: "
             startChoicesFunc
             fi
             ;;
-
+            # Git info selection. Prints info with a quarter of a second delay between lines.
             git)
             echo "Git/Version Control has been selected" $'\n'
                 sleep .25
-            echo "" $'\n'
+            echo "Git is a widely used version control tool. It allows a user to remotely save their projects and return to previous versions if need be. " $'\n'
                 sleep .25
-            echo "" $'\n'
+            echo "Git allows a user to have a record of any changes made and allows others to offer contirubtions to a project." $'\n'
                 sleep .25
-            echo ""  $'\n'
+            echo "Once git is installed you can create a repository and copy its URL to use in the command \"git clone url\". You can also use \"git init\" t initialize a new repository on your local machine" $'\n'
                 sleep .25
-            echo "" $'\n'
+            echo "Once your setup is complete you can use \"git status\" to  see what files in your directory are added to you workspace or not. " $'\n'
                 sleep .25
             echo "" $'\n'
                 sleep .25
@@ -66,6 +68,7 @@ echo "Please select an option to begin: "
                 sleep .25
             echo "S"
                 sleep .25
+            # Prompt user for input. "yes" will end the program, but any other input will return to selection.
             echo "Press enter to go back to selection or type \"yes\" to end"
             read exitVarGit
             if (( $exitVarGit == yes ))

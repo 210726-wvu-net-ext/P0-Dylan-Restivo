@@ -8,9 +8,21 @@
     2) Had spaces working for a minute using ^ as an escape character. Stopped working at some point
 
  '
-# # Function to create a quizz module --- Not used yet--- See to do 1)
-# correctAnswers=0
-# totalAnswers=5
+# Function to create a quizz module --- Not used yet--- See to do 1)
+correctAnswers=0
+answerWrong=0
+totalAnswers=5
+
+ # Function to calculate quiz results
+quizResults () {
+echo "You got $correctAnswers out of $totalAnswers!"
+echo "Press enter to exit"
+read
+echo "Goodbye!"
+sleep 1
+exit
+
+}
 
 # Quiz answer variables
 # Question 1
@@ -50,21 +62,30 @@ q5Answer4=Staging_area
 do
     case $answer in
         "$q1Answer1")
+            answerWrong=1
             clear
             echo "Wrong answer"
             question1
             ;;
         $q1Answer2)
+            answerWrong=1
             clear
             echo "Wrong answer"
             question1
             ;;
-        $q1Answer3)  
+        $q1Answer3)
+            answerWrong=1
             clear
             echo "Wrong answer"
             question1
             ;;
         $q1Answer4)
+        # Check to see if answerWrong var is == 0 (did not get question wrong prior to correct selection and reset after for next question)
+        if ((answerWrong==0))
+            then
+                ((correctAnswers=$correctAnswers+1))
+        fi
+            answerWrong=0
             echo "Correct answer"
             sleep 1
             clear
@@ -81,23 +102,32 @@ done
 do
     case $answer in
         $q2Answer1)
+            answerWrong=1
             clear
             echo "Wrong answer"
             question2
             ;;
         $q2Answer2)
+        # Check to see if answerWrong var is == 0 (did not get question wrong prior to correct selection and reset after for next question)
+        if ((answerWrong==0))
+            then
+                ((correctAnswers=$correctAnswers+1))
+        fi
+            answerWrong=0
             echo "Correct answer"
             sleep 1
             clear
             sleep .25
             question3
             ;;
-        $q2Answer3)  
+        $q2Answer3)
+            answerWrong=1
             clear
             echo "Wrong answer"
             question2
             ;;
         $q2Answer4)
+            answerWrong=1
             clear
             echo "Wrong answer"
             question2
@@ -113,16 +143,24 @@ done
 do
     case $answer in
         $q3Answer1)
+            answerWrong=1
             clear
             echo "Wrong answer"
             question3
             ;;
         $q3Answer2)
+            answerWrong=1
             clear
             echo "Wrong answer"
             question3
             ;;
-        $q3Answer3)  
+        $q3Answer3)
+        # Check to see if answerWrong var is == 0 (did not get question wrong prior to correct selection and reset after for next question)
+        if ((answerWrong==0))
+            then
+                ((correctAnswers=$correctAnswers+1))
+        fi
+            answerWrong=0
             echo "Correct answer"
             sleep 1
             clear
@@ -130,6 +168,7 @@ do
             question4
             ;;
         $q3Answer4)
+            answerWrong=1
             clear
             echo "Wrong answer"
             question3
@@ -145,23 +184,32 @@ done
 do
     case $answer in
         $q4Answer1)
+            answerWrong=1
             clear
             echo "Wrong answer"
             question4
             ;;
         $q4Answer2)
+        # Check to see if answerWrong var is == 0 (did not get question wrong prior to correct selection and reset after for next question)
+        if ((answerWrong==0))
+            then
+                ((correctAnswers=$correctAnswers+1))
+        fi
+            answerWrong=0
             echo "Correct answer"
             sleep 1
             clear
             sleep .25
             question5
             ;;
-        $q4Answer3)  
+        $q4Answer3) 
+            answerWrong=1
             clear
             echo "Wrong answer"
             question4
             ;;
         $q4Answer4)
+            answerWrong=1
             clear
             echo "Wrong answer"
             question4
@@ -177,27 +225,35 @@ done
 do
     case $answer in
         $q5Answer1)
+            answerWrong=1
             clear
             echo "Wrong answer"
             question5
             ;;
         $q5Answer2)
+            answerWrong=1
             clear
             echo "Wrong answer"
             question5
             ;;
-        $q5Answer3)  
+        $q5Answer3)
+            answerWrong=1
             clear
             echo "Wrong answer"
             question5
             ;;
         $q5Answer4)
+        # Check to see if answerWrong var is == 0 (did not get question wrong prior to correct selection and reset after for next question)
+        if ((answerWrong==0))
+            then
+                ((correctAnswers=$correctAnswers+1))
+        fi
+            answerWrong=0
             echo "Correct answer"
             sleep 1
             clear
             sleep .25
-            #results
-            exit
+            quizResults
             ;; 
     esac
 done

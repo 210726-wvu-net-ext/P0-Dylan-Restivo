@@ -4,11 +4,10 @@
     When user reaches the end of a section they can input "exit" to end program or anything else to return to selection.
     Started on quiz section
 
-    1) To do: count correct answers and give total. Have variables when a question is gotten wrong that change and prevent i counting as correct
-    2) Had spaces working for a minute using ^ as an escape character. Stopped working at some point
+    1) Had spaces working for a minute using ^ as an escape character. Stopped working at some point
 
  '
-# Function to create a quizz module --- Not used yet--- See to do 1)
+# Function to create a quizz module
 correctAnswers=0
 answerWrong=0
 totalAnswers=5

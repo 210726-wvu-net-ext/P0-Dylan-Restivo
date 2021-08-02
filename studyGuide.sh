@@ -339,6 +339,7 @@ echo "Please select an option to begin: "
             fi
             ;;
 
+            # Quiz module option
             quizz)
                 echo "Clearing terminal"
                 clear
@@ -348,6 +349,7 @@ echo "Please select an option to begin: "
                 question1
                 ;;
 
+            # Exit option
             quit)
                 echo "Goodbye!"
                 sleep 1

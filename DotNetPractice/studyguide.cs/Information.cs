@@ -3,13 +3,13 @@ using System.Collections;
 /*
     Class to store information for Main
     Allows user to add new info
+    Allows user to make new subjects
 */
 
 namespace studyguide.cs
 {
     public static class Information{
-        public static int infoNumber;
-        public static string addInfo (ArrayList arr) {
+        public static void AddInfo (ArrayList arr) {
             //prompt user to add information
             Console.WriteLine("Enter the information now please: ");
             string newInfo = Console.ReadLine();
@@ -19,26 +19,25 @@ namespace studyguide.cs
             ");
             string confirmEntry = Console.ReadLine();
             if (confirmEntry.ToLower() == "yes") {
-                
+                arr.Add(newInfo);
             }else if (confirmEntry.ToLower() == "no"){
-                addInfo(arr);
+                AddInfo(arr);
+         
             }
-            return newInfo;
+        }
+
+        public static void GetInfo () {
+
         }
 
 
         static void main(string[] args){
+        ArrayList subjects = new ArrayList() {}
 
 
 
 
 
         }
-
-
-
-
-
-
     }
 }

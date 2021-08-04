@@ -10,7 +10,7 @@ namespace studyguide.cs
 {
     class Program
     {
-        static void selectOption () {
+        static void SelectOption () {
             string userSelection = Console.ReadLine();
             switch (userSelection.ToLower()){
                 case "a":
@@ -23,9 +23,14 @@ namespace studyguide.cs
                     ;
                 default:
                     Console.WriteLine("Please enter either A or B");
-                    selectOption();
+                    SelectOption();
                     break;
                 }
+            }
+
+            // Function to pull up information module and data from Information.cs
+           void startInfo () {
+               // Store info as ArrayList objects
             }
         static void Main(string[] args)
         {
@@ -35,7 +40,7 @@ namespace studyguide.cs
 A) Information
 B) Quiz
                             ");
-            selectOption();
+            SelectOption();
 
         }
     }

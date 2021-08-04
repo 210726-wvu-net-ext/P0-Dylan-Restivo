@@ -1,14 +1,42 @@
 using System;
 using System.Collections;
+using System.Data.SQLite;
+
+// using (var connection = new SQLiteConnection("Data Source=studyGuide.sl3"))
+// {
+//     connection.Open();
+
+//     var command = connection.CreateCommand();
+//     command.CommandText = 
+//     @"
+//         SELECT * FROM information;
+//     ";
+// }
 /*
     Class to store information for Main
     Allows user to add new info
     Allows user to make new subjects
 */
+                string cs = "Data Source=:memory:";
+                string stm = "SELECT SQLITE_VERSION()";
+
+                using var con = new SQLiteConnection(cs);
+                con.Open();
+
+                using var cmd = new SQLiteCommand(stm, con);
+                string version = cmd.ExecuteScalar().ToString();
+                Console.WriteLine($"SQLite version: {version}");
 
 namespace studyguide.cs
 {
+    class sqlData{
+
+
+        
+    }
     public static class Information{
+        //Adding in SQLite support
+
         public static void AddInfo (ArrayList arr) {
             //prompt user to add information
             Console.WriteLine("Enter the information now please: ");
@@ -32,7 +60,7 @@ namespace studyguide.cs
 
 
         static void main(string[] args){
-        ArrayList subjects = new ArrayList() {}
+        ArrayList subjects = new ArrayList() {};
 
 
 

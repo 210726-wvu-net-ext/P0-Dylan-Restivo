@@ -18,34 +18,19 @@ namespace Lib
         }
         private int id;
         public int Id {
-            get { return value; }
-            set { this.Id = value; } 
+            get { return id; }
+            set { id = value; } 
             }
         private string name;
         public string Name {
-            get { return value; }
-            set { this.Name = value; } 
+            get { return name; }
+            set { name = value; } 
             }
 
-        //review function write result to file
-        public void Review(){
-            //Review consists of string title
-            //comments
-            //rating
-            //string 
-        }
-        class Review
-        {
-            public User()
-            {
-                
-            }
-            private string title;
-            public string Title { get; set; }
-            private string comments;
-            public string Comments { get; set; }
-            private int rating;
-            public int Rating { get; set; }
+        //Write review function write result to file
+        public void WriteReview(){
+
+
         }
 
     }

@@ -1,11 +1,30 @@
 {
   "version": 3,
   "targets": {
-    "net5.0": {}
+    "net5.0": {
+      "Lib/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v5.0",
+        "compile": {
+          "bin/placeholder/Lib.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Lib.dll": {}
+        }
+      }
+    }
   },
-  "libraries": {},
+  "libraries": {
+    "Lib/1.0.0": {
+      "type": "project",
+      "path": "../Lib/Lib.csproj",
+      "msbuildProject": "../Lib/Lib.csproj"
+    }
+  },
   "projectFileDependencyGroups": {
-    "net5.0": []
+    "net5.0": [
+      "Lib >= 1.0.0"
+    ]
   },
   "packageFolders": {
     "C:\\Users\\MMooKow\\.nuget\\packages\\": {},
@@ -41,7 +60,11 @@
       "frameworks": {
         "net5.0": {
           "targetAlias": "net5.0",
-          "projectReferences": {}
+          "projectReferences": {
+            "C:\\Revature\\training-code\\Project0\\Lib\\Lib.csproj": {
+              "projectPath": "C:\\Revature\\training-code\\Project0\\Lib\\Lib.csproj"
+            }
+          }
         }
       },
       "warningProperties": {

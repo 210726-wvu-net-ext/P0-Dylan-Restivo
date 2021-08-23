@@ -23,9 +23,10 @@ namespace DL
         public List<Models.Users> GetAllUsers()
         {
             return _context.Users.Select(
-                users => new Models.Users(users.Name, users.UserName,users.Password)
+                users => new Models.Users(users.Name, users.UserName,users.Password, users.Id)
             ).ToList();
         }
+
 
         public List<Models.Reviews> GetAllReviews()
         {
@@ -161,15 +162,15 @@ namespace DL
             return false;
         }
 
-        public int GetUserId(string userName)
+        public Models.Users GetUserId(string userName)
         {
-            Entities.User foundUser = _context.Users.FirstOrDefault(
-                foundUser => foundUser.UserName == userName
-            );
+            Entities.User foundUser = _context.Users
+            .FirstOrDefault(users => users.Name == userName);
             if(foundUser != null)
             {
-                return foundUser.Id;
-            }else return -1;
+                return new Models.Users(foundUser.Name, foundUser.UserName, foundUser.Password, foundUser.Id);
+            }    
+            return new Models.Users();
         }
 
     }

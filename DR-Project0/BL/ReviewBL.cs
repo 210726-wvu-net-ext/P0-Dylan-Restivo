@@ -77,7 +77,7 @@ namespace BL
             return _repo.GetUserName(userName);
         }
 
-        public int CheckUserId(string userName)
+        public Users CheckUserId(string userName)
         {
             return _repo.GetUserId(userName);
         }

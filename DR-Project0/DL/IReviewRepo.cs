@@ -32,6 +32,6 @@ namespace DL
 
         bool GetUserName(string userName);
 
-        int GetUserId(string username);
+        Users GetUserId(string username);
     }
 }

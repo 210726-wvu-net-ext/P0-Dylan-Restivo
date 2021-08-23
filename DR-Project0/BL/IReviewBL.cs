@@ -31,6 +31,6 @@ namespace BL
 
          bool CheckUserName(string userName);
 
-         int CheckUserId(string userName);
+         Users CheckUserId(string userName);
     }
 }

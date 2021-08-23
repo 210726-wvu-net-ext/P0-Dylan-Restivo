@@ -490,7 +490,7 @@ namespace UI
              Console.WriteLine("Is this correct (Y/N) ");
              string YorN = Console.ReadLine();
              if(YorN.ToLower().Equals("y")){
-                userToAdd = new Users(name, userName, password);
+                userToAdd = new Models.Users(name, userName, password);
                 userToAdd = _reviewbl.AddUser(userToAdd);
                 Console.WriteLine("Information confirmed! Welcome!");
              }else if (YorN.ToLower().Equals("n")){
@@ -531,8 +531,8 @@ namespace UI
 
             private int CheckUserIdUI(string userName)
             {
-                int foundUser = _reviewbl.CheckUserId(userName);
-                return foundUser;
+                Models.Users foundUser = _reviewbl.CheckUserId(userName);
+                return foundUser.Id;
             }
 
 

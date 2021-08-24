@@ -68,8 +68,20 @@ namespace DL
             }    
             return new Models.Restaurant();
         }
+        public Models.Users GetUserById(int id)
+        {
+            Entities.User foundUser = _context.Users
+            .FirstOrDefault(user => user.Id == id);
+            Console.WriteLine($"Id {id}");
+            try{
+                return new Models.Users(foundUser.Name, foundUser.UserName, foundUser.Password, foundUser.Id);
+            }catch(NullReferenceException)
+            {
+                return null;
+            }
+        }
     
-            public Models.Restaurant RestaurantLookupZip(string zipcode)
+        public Models.Restaurant RestaurantLookupZip(string zipcode)
         {
             Entities.Restaurant foundRestaurant = _context.Restaurants
             .FirstOrDefault(restaurant => restaurant.Zipcode == zipcode);
@@ -125,8 +137,10 @@ namespace DL
             if(foundRestaurant != null)
             {
                 return new Models.Restaurant(foundRestaurant.Id, foundRestaurant.Name, foundRestaurant.Zipcode);
-            }    
-            return new Models.Restaurant();
+            }else{
+                return null;
+            }
+            
         }
 
         public Models.Users GetUserPassword(string userName)

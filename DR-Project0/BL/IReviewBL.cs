@@ -15,6 +15,8 @@ namespace BL
          Restaurant RestaurantLookupName(string name);
          Restaurant RestaurantLookupId(int restaurantId);
 
+         Users UserLookupName(int userId);
+
          Restaurant RestaurantLookupZip(string zipcode);
 
          List <Reviews> SearchReviewsByRestaurantId(int restaurantId);
@@ -32,5 +34,6 @@ namespace BL
          bool CheckUserName(string userName);
 
          Users CheckUserId(string userName);
+
     }
 }

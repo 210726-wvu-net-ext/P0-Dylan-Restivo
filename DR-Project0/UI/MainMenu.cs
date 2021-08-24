@@ -3,7 +3,6 @@ using BL;
 using System.Text.RegularExpressions;
 using System.Collections.Generic;
 using Models;
-using UI;
 
 namespace UI
 {
@@ -54,11 +53,13 @@ namespace UI
 
                     case "3":
                         Console.WriteLine("Goodbye!");
+                        Console.WriteLine();
                         Environment.Exit(0);
                     break;
 
                     default:
                         Console.WriteLine("Please enter a valid number");
+                        Console.WriteLine();
                     break;
                 }
             }while(true);
@@ -85,14 +86,17 @@ namespace UI
                 else if(truePass != adminPass)
                 {
                     Console.WriteLine("Invalid password. Check your spelling and try again.");
+                    Console.WriteLine();
                     goto InvalidPass;
                 }
             }
             catch(ArgumentNullException){
                 Console.WriteLine("Enter a password to login.");
+                Console.WriteLine();
             }
             catch(Exception e){
                 Console.WriteLine(e.Message);
+                Console.WriteLine();
             }
             }while(flag is true);
         ///
@@ -101,6 +105,7 @@ namespace UI
             bool flag2 = true;
             do
             {
+                Console.WriteLine();
                 Console.WriteLine("Welcome Admin");
                 Console.WriteLine("[0] Search users");
                 Console.WriteLine("[1] Logout");
@@ -113,11 +118,13 @@ namespace UI
 
                     case "1":
                         Console.WriteLine("Thank you! Have a good day!");
+                        Console.WriteLine();
                         flag2 = false;
                     break;
 
                     default:
                         Console.WriteLine("Please enter a valid number");
+                        Console.WriteLine();
                     break;
                 }
             }while(flag2 is true);
@@ -125,6 +132,7 @@ namespace UI
 /// <summary>
 /// Function to login as user and provide options
 /// </summary>
+
         private void UserLogin()
         {
             /// <summary>
@@ -145,18 +153,22 @@ namespace UI
                 bool validateName = CheckUserNameUI(userName);
                 if(validateName is true){
                     Console.WriteLine("Username validated.. Continuing:");
+                    Console.WriteLine();
                     flag = false;
                 }
                 else if(validateName is false){
                     Console.WriteLine($"No username {userName} exists.");
+                    Console.WriteLine();
                     goto InvalidName;
                 }
             }
             catch(ArgumentNullException){
                 Console.WriteLine("Enter a username now please.");
+                Console.WriteLine();
             }
             catch(Exception e){
                 Console.WriteLine(e.Message);
+                Console.WriteLine();
             }
             }while(flag is true);
             /// <summary>
@@ -171,21 +183,26 @@ namespace UI
                 userPass = Console.ReadLine();
                 string truePass = PassowrdVerifyUserUI(userName);
                 if(truePass == userPass){
+                    Console.WriteLine();
                     Console.WriteLine($"Login successful! Welcome {userName}");
                     flag2 = false;
                 }
                 else if(truePass != userPass){
                     Console.WriteLine("Username and password do not match.");
+                    Console.WriteLine();
                     goto InvalidPass;
                 }
             }
             catch(ArgumentNullException){
                 Console.WriteLine("Enter a password to login.");
+                Console.WriteLine();
             }
             catch(Exception e){
                 Console.WriteLine(e.Message);
+                Console.WriteLine();
             }
             }while(flag2 is true);
+
         /// <summary>
         /// Loop to provide user functions
 /// - add reviews to a restaurant as a user
@@ -219,7 +236,7 @@ namespace UI
                     break;
 
                     case "3":
-                        AddReviewUI(userName);
+                        AddReviewUI();
                     break;
 
                     case "4":
@@ -239,12 +256,24 @@ namespace UI
         private void ViewAllRestaurants()
         {
             List<Models.Restaurant> restaurants = _reviewbl.ViewAllRestaurants();
+            
             foreach(Models.Restaurant restaurant in restaurants)
             {
+            List<Reviews> reviewList = AvgReviewRatingsUI(restaurant.Id);
+            double reviewNums = 0;
+            int count = 0;
+            foreach(Reviews review in reviewList)
+            {
+                reviewNums += review.Rating;
+                count++;
+            }
+            double reviewAvg = reviewNums/count; 
+
                 Console.WriteLine($@"
                -------------------------------------------
                 Name: {restaurant.Name} 
                 ZipCode: {restaurant.ZipCode}
+                Average Rating: {reviewAvg}
                 -------------------------------------------
                 ");
             }
@@ -315,9 +344,9 @@ namespace UI
 
             if(foundRestaurant.Name is null){
                 Console.WriteLine($"{input} was not found");
+                Console.WriteLine();
             }
             else{
-            //    List<Reviews> reviewList = AvgReviewRatingsUI(foundRestaurant.Id);
  
                 Console.WriteLine($@"Restaurant found!
                 -------------------------------------------
@@ -335,6 +364,13 @@ namespace UI
         {
             Models.Restaurant foundRestaurant = _reviewbl.RestaurantLookupId(restaurantId);
             return foundRestaurant.Name;
+
+        }
+
+        private string UserLookupNameUI(int userId)
+        {
+            Models.Users foundUser = _reviewbl.UserLookupName(userId);
+            return foundUser.UserName;
 
         }
 /// <summary>
@@ -359,6 +395,7 @@ namespace UI
 
             if(foundRestaurant.Name is null){
                 Console.WriteLine($"Search by {zipcode} found no results.");
+                Console.WriteLine();
             }
             else{
  
@@ -380,9 +417,11 @@ namespace UI
         private void ReviewsForRestaurantUI(int restaurantId)
         {
             List<Models.Reviews> foundReview = _reviewbl.SearchReviewsByRestaurantId(restaurantId);
+            
 
             foreach(Models.Reviews review in foundReview)
             {
+                // string userName = UserLookupNameUI(review.UserId);
                 Console.WriteLine($@"Reviews found!
                 -------------------------------------------
                 Review: {review.Content} 
@@ -397,19 +436,47 @@ namespace UI
 /// <summary>
 /// Add review function. Calls RestaurantLookUpForReviewAddUI()
 /// </summary>
-         private void AddReviewUI(string userName) 
+         private void AddReviewUI() 
         {
             int rating = 0;
-            int userId = CheckUserIdUI(userName);
             string content;
             string restaurantName;
             Models.Reviews reviewToAdd;
 
             Console.WriteLine("Enter your review details: ");
 
+            do{
+
+            redoRating:
             Console.WriteLine("Rating (1-5): ");
+            try{
             rating = Convert.ToInt32(Console.ReadLine());
+            }catch(FormatException)
+            {
+                Console.WriteLine("Error: Only include numbers from 1-5");
+                Console.WriteLine();
+                goto redoRating;
+            }
+            catch(OverflowException)
+            {
+                Console.WriteLine("Error: Only include numbers from 1-5");
+                Console.WriteLine();
+            }
+            bool numRegex = Regex.IsMatch(Convert.ToString(rating), @"^[1-5]+$");
+            if(numRegex is false){
+                Console.WriteLine("Error: Enter a number from 1 to 5 ");
+                Console.WriteLine();
+                goto redoRating;
+            }
+            if(rating < 1 || rating > 5){
+                Console.WriteLine("Rating is not within our scale. Use 1-5:");
+                Console.WriteLine();
+                goto redoRating;
+            }
             Console.WriteLine("You entered: {0}", rating);
+            Console.WriteLine();
+
+            }while(String.IsNullOrWhiteSpace(Convert.ToString(rating)));
 
             do{
 
@@ -417,13 +484,24 @@ namespace UI
             content = Console.ReadLine();
             
             }while(String.IsNullOrWhiteSpace(content));
+            Console.WriteLine(); //for spacing
 
+            int restId = 0;
+            do{
+            Console.WriteLine();
+            redoRestName:
             Console.WriteLine("Enter a restaurant name: ");
             restaurantName = Console.ReadLine();
-            int restId = RestaurantLookupForReviewAddUI(restaurantName);
-            
+            try{
+                restId = RestaurantLookupForReviewAddUI(restaurantName);
+            }
+            catch(NullReferenceException){
+                Console.WriteLine("Error: Restaurant not found: Check your spelling and try again.");
+                goto redoRestName;
+            }
+            }while(String.IsNullOrWhiteSpace(restaurantName));
 
-            reviewToAdd = new Reviews(rating, content, restId, userId);
+            reviewToAdd = new Reviews(rating, content, restId);
             reviewToAdd = _reviewbl.AddReview(reviewToAdd);
 
             Console.WriteLine($"Review was successfully added!");
@@ -445,6 +523,14 @@ namespace UI
 
             Console.WriteLine("Enter your name please: ");
             name = Console.ReadLine();
+
+            /// <summary>
+            /// Validate name not numbers
+            /// </summary>
+
+            bool nameRegex = Regex.IsMatch(name, @"^[a-zA-Z]+$");
+            if (nameRegex == false)
+            Console.WriteLine("Error: Name cannot contain numbers");
 
         }while(String.IsNullOrWhiteSpace(name));
         
@@ -533,6 +619,12 @@ namespace UI
             {
                 Models.Users foundUser = _reviewbl.CheckUserId(userName);
                 return foundUser.Id;
+            }
+
+            private Models.Users CheckUserInfoUI(string userName)
+            {
+                Models.Users foundUser = _reviewbl.CheckUserId(userName);
+                return foundUser;
             }
 
 

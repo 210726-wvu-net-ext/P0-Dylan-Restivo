@@ -27,7 +27,8 @@ namespace BL
             return _repo.GetAllReviews();
         }
 
-        public List<Reviews> AvgReviewRatings(int restaurantId){
+        public List<Reviews> AvgReviewRatings(int restaurantId)
+        {
             return _repo.GetAvgRatings(restaurantId);
         }
         public Restaurant RestaurantLookupName(string name)
@@ -40,7 +41,13 @@ namespace BL
             return _repo.GetRestaurantById(restaurantId);
         }
 
-        public Restaurant RestaurantLookupZip(string zipcode){
+        public Users UserLookupName(int userId)
+        {
+            return _repo.GetUserById(userId);
+        }
+
+        public Restaurant RestaurantLookupZip(string zipcode)
+        {
             return _repo.RestaurantLookupZip(zipcode);
         }
 
@@ -49,7 +56,8 @@ namespace BL
             return _repo.GetReviewsByRestaurantId(restaurantId);
         }
 
-        public Reviews AddReview(Reviews reviewToAdd){
+        public Reviews AddReview(Reviews reviewToAdd)
+        {
             return _repo.AddAReview(reviewToAdd);
         }
 

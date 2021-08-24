@@ -16,6 +16,8 @@ namespace DL
         Restaurant GetRestaurantByName(string name);
         Restaurant GetRestaurantById(int id);
 
+        Users GetUserById(int id);
+
         Restaurant RestaurantLookupZip(string zipcode);
 
         List<Models.Reviews> GetReviewsByRestaurantId(int restaurantId);

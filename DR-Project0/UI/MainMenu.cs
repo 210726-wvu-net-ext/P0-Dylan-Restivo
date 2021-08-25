@@ -273,7 +273,7 @@ namespace UI
                -------------------------------------------
                 Name: {restaurant.Name} 
                 ZipCode: {restaurant.ZipCode}
-                Average Rating: {reviewAvg}
+                Average Rating: {reviewAvg:N2}
                 -------------------------------------------
                 ");
             }

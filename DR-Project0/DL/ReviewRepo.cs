@@ -43,7 +43,11 @@ namespace DL
             )
             .ToList();
         }
-
+    
+    // Date Method
+    public string FindReviewByDate(DateTime time){
+        return "This will return the review";
+    }
 
     //Search for restaurant by name
         public Models.Restaurant GetRestaurantByName(string name)
